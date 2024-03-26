@@ -58,6 +58,35 @@ def server(password, port):
             print(f"An error occurred: {e}")
 
 def main():
+    """
+    Initiates a secure communication session using Elliptic Curve Cryptography (ECC).
+
+    This function serves as the entry point for setting up a secure communication channel
+    either in client or server mode. The communication is secured using ECC, with a password
+    provided for authentication purposes. The user must specify the mode of operation, the 
+    password for authentication, and the port to be used for the communication. 
+
+    In client mode, the function also accepts an optional parameter to repeat the communication 
+    process a specified number of times. This feature is not available in server mode. If the 
+    repeat option is mistakenly used in server mode, the function will issue a warning and 
+    ignore the repeat parameter.
+
+    Parameters:
+    - mode (str): Specifies the mode of operation. It can be either 'client' or 'server'.
+    - password (str): The password used for authentication purposes.
+    - port (int): The port number to connect to or listen on for incoming connections.
+    - repeat (int, optional): The number of times to repeat the process in client mode. Defaults to 1.
+
+    Note: The 'repeat' option is only valid in client mode and will be ignored if specified in server mode.
+    
+    Example of usage:
+    - To start as a client: python script.py client secret_password 8080 --repeat 5
+    - To start as a server: python script.py server secret_password 8080
+
+    Returns:
+    None. The function's primary purpose is to set up and manage secure communications.
+    """
+    
     parser = argparse.ArgumentParser(description="ECC Secure Communication")
     parser.add_argument("mode", choices=["client", "server"], help="Mode: client or server")
     parser.add_argument("password", help="Password for authentication")
